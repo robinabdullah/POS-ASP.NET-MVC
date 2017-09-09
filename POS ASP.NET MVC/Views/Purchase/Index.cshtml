@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+
+            @*Left Side Controls*@
+            <div>
+                <div style="float:left;width:50%">
+
+                    <table class="table table-responsive">
+                        <tr>
+                            <td> Date </td>
+                            <td> <input type="text" id="date" /> </td>
+                        </tr>
+
+                        <tr>
+                            <td> Ref No </td>
+                            <td> <input type="text" id="refNo" /> </td>
+                        </tr>
+
+                        <tr>
+                            <td> Product Type </td>
+                            <td> <input type="text" id="type" /> <input type="button" id="type" value="Add" /></td>
+
+                        </tr>
+
+                        <tr>
+                            <td> Product Quantity </td>
+                            <td> <input type="text" id="quantity" /> </td>
+                        </tr>
+
+                        <tr>
+                            <td> Barcode </td>
+                            <td> <input type="text" id="barcode" readonly="readonly" /> </td>
+                        </tr>
+
+                        <tr>
+                            <td> Description </td>
+                            <td> <input type="text" id="description" /> </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                @*Right Side Controls*@
+                <div style="float:right;width:50%">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td height="42">  </td>
+                            <td >  </td>
+                        </tr>
+
+                        <tr>
+                            <td> Supplier </td>
+                            <td>
+                                <select id="supplier" class="form-control" onchange="LoadSuppliers(this)">
+                                    <option> Select </option>
+                                </select>
+
+                                <input type="button" id="type" value="Add" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td> Product Model </td>
+                            <td>
+                                <select id="model" class="form-control" onchange="LoadModels(this)">
+                                    <option> Select </option>
+                                </select>
+                                <input type="button" id="type" value="Add" />
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Unit Price
+                                <input type="text" id="unitPrice" />
+                            </td>
+                            <td>
+                                Sale Price
+                                <input type="text" id="salePrice" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td> Barcode Serial </td>
+                            <td> <input type="text" id="barcodeSerial" /> </td>
+                        </tr>
+
+
+
+                    </table>
+                </div>
+            </div>
+            @*<div>
+
+                <table class="table table-responsive">
+            <tr>
+                <td> Date </td>
+                <td colspan="4" >  <input type="text" id="date" /> </td>
+            </tr>
+
+            <tr>
+                <td> Ref No  </td>
+                <td> <input type="text" id="refNo" /> </td>
+                <td> Supplier </td>
+                <td colspan="2"> <input type="text" id="supplier" />  <input  type="button" id="addSupplier" value="Add" /> </td>
+            </tr>
+            <tr>
+                <td> Product Type </td>
+                <td> <input type="text" id="type" /> </td>
+                <td> Product Model </td>
+                <td> <input type="text" id="model" /> </td>
+                <td> <input type="button" id="addSupplier" class="btn btn-default" value="Add" /> </td>
+            </tr>
+        </table>
+
+    </div>*@
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    
+    @*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+</body>
+</html>
