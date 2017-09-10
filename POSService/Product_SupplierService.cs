@@ -1,6 +1,6 @@
-﻿using POSData.Interfaces;
+﻿using POSData;
 using POSEntity;
-using POSService.Interfaces;
+using POSService;
 using System;
 using System.Collections.Generic;
 using System.Linq;

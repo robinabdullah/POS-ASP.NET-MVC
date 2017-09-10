@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessFactory.cs" />
     <Compile Include="Interfaces\IProductDataAccess.cs" />
     <Compile Include="Interfaces\IProduct_SupplierDataAccess.cs" />
     <Compile Include="Interfaces\ISaleDataAccess.cs" />

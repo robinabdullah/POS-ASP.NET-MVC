@@ -12,8 +12,6 @@ namespace POSData
     {
             public DbSet<Sale> Sales { get; set; }
             public DbSet<Product> Products { get; set; }
-        public DbSet<Product_Supplier> Product_Suppliers { get; set; }
-
-
+            public DbSet<Product_Supplier> Product_Suppliers { get; set; }
     }
 }

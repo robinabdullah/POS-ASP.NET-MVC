@@ -11,7 +11,8 @@ namespace POSEntity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         public Product()
@@ -21,7 +22,6 @@ namespace POSEntity
             this.Free_Product = new HashSet<Free_Product>();
             this.Product_Supplier = new HashSet<Product_Supplier>();
         }
-    
         public int ID { get; set; }
         public string Type { get; set; }
         public string Model { get; set; }

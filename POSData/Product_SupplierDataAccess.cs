@@ -1,4 +1,4 @@
-﻿using POSData.Interfaces;
+﻿using POSData;
 using POSEntity;
 using System;
 using System.Collections.Generic;

@@ -7,7 +7,19 @@
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <script>
+            //Date Picker
+            $(function () {
+                $("#date").datepicker({
+                    dateFormat: "dd/mm/yy"
+                });
+            });
+    </script>
+    
 </head>
 <body>
     @using (Html.BeginForm()) 
@@ -16,120 +28,70 @@
         
         <div class="form-horizontal">
 
-            @*Left Side Controls*@
-            <div>
-                <div style="float:left;width:50%">
+                <table class="table table-responsive" style="width:auto">
+                    <tr>
+                        <td class="auto-style1"> Date </td>
+                        <td colspan="5"> <input type="text" value="@DateTime.Now.ToShortDateString()" id="date" /> </td>
+                    </tr>
 
-                    <table class="table table-responsive">
-                        <tr>
-                            <td> Date </td>
-                            <td> <input type="text" id="date" /> </td>
-                        </tr>
+                    <tr>
+                        <td class="auto-style1"> Ref No </td>
+                        <td> <input type="text" id="refNo" /> </td>
+                        <td> Supplier </td>
+                        <td colspan="3">
+                            @*<select id="supplier" style="width:auto">
+                                <option> Select </option>
+                            </select>*@
+                            @Html.DropDownList("supplier", new SelectList(ViewData["supplierList"] as string[]))
 
-                        <tr>
-                            <td> Ref No </td>
-                            <td> <input type="text" id="refNo" /> </td>
-                        </tr>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td> Product Type </td>
-                            <td> <input type="text" id="type" /> <input type="button" id="type" value="Add" /></td>
+                    <tr>
+                        <td class="auto-style1"> Product Type </td>
+                        <td>
+                            <select id="type" style="width:auto" class="form-control">
+                                <option> Select </option>
+                            </select>
+                        </td>
+                        <td> Product Model </td>
+                        <td colspan="3">
+                            <select id="model" style="width:auto">
+                                <option> Select </option>
+                            </select>
+                        </td>
+                    </tr>
 
-                        </tr>
+                    <tr>
+                        <td class="auto-style1"> Product Quantity </td>
+                        <td> <input type="text" id="quantity" /> </td>
+                        <td> Unit price </td>
+                        <td class="auto-style2"> <input type="text" id="unitPrice" class="auto-style3" /> </td>
+                        <td> Sale price </td>
+                        <td> <input type="text" id="salePrice" /> </td>
+                    </tr>
 
-                        <tr>
-                            <td> Product Quantity </td>
-                            <td> <input type="text" id="quantity" /> </td>
-                        </tr>
+                    <tr>
+                        <td class="auto-style1"> Barcode </td>
+                        <td> <input type="text" id="barcode" readonly="readonly" /> </td>
+                        <td> Barcode Serial </td>
+                        <td class="auto-style2">
+                            <input id="barcodeSerial" class="auto-style4" />
+                        </td>
+                        <td> Color </td>
+                        <td>
+                            <select id="color" style="width:auto">
+                                <option> Select </option>
+                            </select>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td> Barcode </td>
-                            <td> <input type="text" id="barcode" readonly="readonly" /> </td>
-                        </tr>
+                    <tr>
+                        <td class="auto-style1"> Description </td>
+                        <td colspan="5"> <input type="text" id="description" class="form-control" /> </td>
+                    </tr>
 
-                        <tr>
-                            <td> Description </td>
-                            <td> <input type="text" id="description" /> </td>
-                        </tr>
-
-                    </table>
-                </div>
-
-                @*Right Side Controls*@
-                <div style="float:right;width:50%">
-                    <table class="table table-responsive">
-                        <tr>
-                            <td height="42">  </td>
-                            <td >  </td>
-                        </tr>
-
-                        <tr>
-                            <td> Supplier </td>
-                            <td>
-                                <select id="supplier" class="form-control" onchange="LoadSuppliers(this)">
-                                    <option> Select </option>
-                                </select>
-
-                                <input type="button" id="type" value="Add" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td> Product Model </td>
-                            <td>
-                                <select id="model" class="form-control" onchange="LoadModels(this)">
-                                    <option> Select </option>
-                                </select>
-                                <input type="button" id="type" value="Add" />
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Unit Price
-                                <input type="text" id="unitPrice" />
-                            </td>
-                            <td>
-                                Sale Price
-                                <input type="text" id="salePrice" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td> Barcode Serial </td>
-                            <td> <input type="text" id="barcodeSerial" /> </td>
-                        </tr>
-
-
-
-                    </table>
-                </div>
-            </div>
-            @*<div>
-
-                <table class="table table-responsive">
-            <tr>
-                <td> Date </td>
-                <td colspan="4" >  <input type="text" id="date" /> </td>
-            </tr>
-
-            <tr>
-                <td> Ref No  </td>
-                <td> <input type="text" id="refNo" /> </td>
-                <td> Supplier </td>
-                <td colspan="2"> <input type="text" id="supplier" />  <input  type="button" id="addSupplier" value="Add" /> </td>
-            </tr>
-            <tr>
-                <td> Product Type </td>
-                <td> <input type="text" id="type" /> </td>
-                <td> Product Model </td>
-                <td> <input type="text" id="model" /> </td>
-                <td> <input type="button" id="addSupplier" class="btn btn-default" value="Add" /> </td>
-            </tr>
-        </table>
-
-    </div>*@
+                </table>
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -139,5 +101,6 @@
     @*<div>
         @Html.ActionLink("Back to List", "Index")
     </div>*@
+    
 </body>
 </html>

@@ -1,11 +1,11 @@
-﻿using POSData.Interfaces;
+﻿using POSData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSEntity;
-using POSService.Interfaces;
+using POSService;
 
 namespace POSService
 {
