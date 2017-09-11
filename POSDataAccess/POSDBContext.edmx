@@ -1,0 +1,1580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="POSNew12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Bank_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Account_Name" Type="varbinary" MaxLength="50" />
+          <Property Name="Account_No" Type="varchar" MaxLength="50" />
+          <Property Name="Account_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Openning_ Balance" Type="money" />
+          <Property Name="IsPrimary" Type="bit" />
+          <Property Name="Credit_Limit" Type="money" />
+          <Property Name="Current_Balance" Type="money" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="30" />
+          <Property Name="AddressLine" Type="varchar" MaxLength="100" />
+          <Property Name="Postal_Code" Type="varchar" MaxLength="20" />
+          <Property Name="Country" Type="varchar" MaxLength="30" />
+          <Property Name="Phone1" Type="varchar" MaxLength="20" />
+          <Property Name="Phone2" Type="varchar" MaxLength="20" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="Website" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="Barcode_Serial" />
+          </Key>
+          <Property Name="Barcode_Serial" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="15" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Phone2" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer_Sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoice_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Unit_Price" Type="int" />
+          <Property Name="Sold_Price" Type="int" />
+          <Property Name="Sale_Price_was" Type="int" />
+          <Property Name="Sold_By" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Login" Type="datetime" />
+          <Property Name="User_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Address_ID" Type="int" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Manager_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Free_Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoice_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gift">
+          <Key>
+            <PropertyRef Name="Barcode" />
+          </Key>
+          <Property Name="Barcode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Customer_Sale_ID" Type="int" Nullable="false" />
+          <Property Name="SL" Type="varchar" MaxLength="18" />
+          <Property Name="Gift Code" Type="varchar" MaxLength="18" />
+          <Property Name="Discount Price" Type="int" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Sub_Account_ID" Type="int" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PreparedBy" Type="int" />
+          <Property Name="AuthenticatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Journal_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Journal_ID" Type="int" />
+          <Property Name="SNO" Type="int" />
+          <Property Name="Sub_Account_ID" Type="int" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="Narration" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Login" Type="datetime" />
+          <Property Name="User_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Address_ID" Type="int" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Manager_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Main_Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Catagory" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Payment_For_Whom" Type="varchar" MaxLength="10" />
+          <Property Name="Payment_For_ID" Type="int" />
+          <Property Name="Journal_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="25" />
+          <Property Name="Model" Type="varchar" MaxLength="30" />
+          <Property Name="Quantity_Available" Type="int" />
+          <Property Name="Quantity_Sold" Type="int" />
+          <Property Name="Unit_Price" Type="int" />
+          <Property Name="Selling_Price" Type="int" />
+          <Property Name="Des" Type="varchar" MaxLength="70" />
+          <Property Name="Date_Updated" Type="datetime" />
+          <Property Name="Unique_Barcode" Type="char" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Product_Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ref_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Supplier_ID" Type="int" />
+          <Property Name="Journal_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Unit_Price" Type="money" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="Invoice_ID" />
+          </Key>
+          <Property Name="Invoice_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="Journal_ID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sub_Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Main_Accounts_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address_ID" Type="int" Nullable="false" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Contact_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Contact_Designation" Type="varchar" MaxLength="30" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Support">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Voucher_ID" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Barcode__Product__29221CFB">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Barcode" Type="Self.Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer___Invoi__184C96B4">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="1" />
+          <End Role="Customer_Sale" Type="Self.Customer_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Customer_Sale">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer___Produ__2A164134">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Customer_Sale" Type="Self.Customer_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer_Sale">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Customer___Sold___68D28DBC" />-->
+        <Association Name="FK__Employee__Addres__4D2A7347">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Manage__4C364F0E">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Free_Prod__Invoi__1940BAED">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="1" />
+          <End Role="Free_Product" Type="Self.Free_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Free_Product">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Free_Prod__Produ__2B0A656D">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Free_Product" Type="Self.Free_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Free_Product">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Gift__Barcode__36B12243">
+          <End Role="Barcode" Type="Self.Barcode" Multiplicity="1" />
+          <End Role="Gift" Type="Self.Gift" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Barcode">
+              <PropertyRef Name="Barcode_Serial" />
+            </Principal>
+            <Dependent Role="Gift">
+              <PropertyRef Name="Barcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Gift__Customer_S__37A5467C">
+          <End Role="Customer_Sale" Type="Self.Customer_Sale" Multiplicity="1" />
+          <End Role="Gift" Type="Self.Gift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer_Sale">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Gift">
+              <PropertyRef Name="Customer_Sale_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal__Authent__062DE679">
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="AuthenticatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal__Prepare__0539C240">
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="PreparedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal__Sub_Acc__07220AB2">
+          <End Role="Sub_Accounts" Type="Self.Sub_Accounts" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="Sub_Account_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal_D__Journ__04459E07">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Journal_Details" Type="Self.Journal_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal_Details">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Login__Address_I__6ABAD62E">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Login__Manager_I__69C6B1F5">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Journal__39AD8A7F">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_S__Journ__1758727B">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Product_Supplier" Type="Self.Product_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_Supplier">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_S__Produ__15702A09">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Supplier" Type="Self.Product_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_Supplier">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_S__Suppl__16644E42">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Product_Supplier" Type="Self.Product_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__Customer___1A34DF26">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__Journal_I__1B29035F">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sub_Accou__Main___4E1E9780">
+          <End Role="Main_Accounts" Type="Self.Main_Accounts" Multiplicity="0..1" />
+          <End Role="Sub_Accounts" Type="Self.Sub_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Main_Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sub_Accounts">
+              <PropertyRef Name="Main_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Supplier__Addres__3D2915A8">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Support__Voucher__035179CE">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Support" Type="Self.Support" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Support">
+              <PropertyRef Name="Voucher_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voucher_D__Sub_A__52E34C9D">
+          <End Role="Sub_Accounts" Type="Self.Sub_Accounts" Multiplicity="0..1" />
+          <End Role="Journal_Details" Type="Self.Journal_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal_Details">
+              <PropertyRef Name="Sub_Account_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POSNew12ModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barcode" EntityType="Self.Barcode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_Sale" EntityType="Self.Customer_Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Free_Product" EntityType="Self.Free_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gift" EntityType="Self.Gift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Journal" EntityType="Self.Journal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Journal_Details" EntityType="Self.Journal_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Main_Accounts" EntityType="Self.Main_Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Supplier" EntityType="Self.Product_Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sub_Accounts" EntityType="Self.Sub_Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Support" EntityType="Self.Support" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Barcode__Product__29221CFB" Association="Self.FK__Barcode__Product__29221CFB">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Barcode" EntitySet="Barcode" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer___Invoi__184C96B4" Association="Self.FK__Customer___Invoi__184C96B4">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Customer_Sale" EntitySet="Customer_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer___Produ__2A164134" Association="Self.FK__Customer___Produ__2A164134">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Customer_Sale" EntitySet="Customer_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Addres__4D2A7347" Association="Self.FK__Employee__Addres__4D2A7347">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Manage__4C364F0E" Association="Self.FK__Employee__Manage__4C364F0E">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Free_Prod__Invoi__1940BAED" Association="Self.FK__Free_Prod__Invoi__1940BAED">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Free_Product" EntitySet="Free_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Free_Prod__Produ__2B0A656D" Association="Self.FK__Free_Prod__Produ__2B0A656D">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Free_Product" EntitySet="Free_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Gift__Barcode__36B12243" Association="Self.FK__Gift__Barcode__36B12243">
+            <End Role="Barcode" EntitySet="Barcode" />
+            <End Role="Gift" EntitySet="Gift" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Gift__Customer_S__37A5467C" Association="Self.FK__Gift__Customer_S__37A5467C">
+            <End Role="Customer_Sale" EntitySet="Customer_Sale" />
+            <End Role="Gift" EntitySet="Gift" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal__Authent__062DE679" Association="Self.FK__Journal__Authent__062DE679">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal__Prepare__0539C240" Association="Self.FK__Journal__Prepare__0539C240">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal__Sub_Acc__07220AB2" Association="Self.FK__Journal__Sub_Acc__07220AB2">
+            <End Role="Sub_Accounts" EntitySet="Sub_Accounts" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal_D__Journ__04459E07" Association="Self.FK__Journal_D__Journ__04459E07">
+            <End Role="Journal" EntitySet="Journal" />
+            <End Role="Journal_Details" EntitySet="Journal_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Login__Address_I__6ABAD62E" Association="Self.FK__Login__Address_I__6ABAD62E">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Login__Manager_I__69C6B1F5" Association="Self.FK__Login__Manager_I__69C6B1F5">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Journal__39AD8A7F" Association="Self.FK__Payment__Journal__39AD8A7F">
+            <End Role="Journal" EntitySet="Journal" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_S__Journ__1758727B" Association="Self.FK__Product_S__Journ__1758727B">
+            <End Role="Journal" EntitySet="Journal" />
+            <End Role="Product_Supplier" EntitySet="Product_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_S__Produ__15702A09" Association="Self.FK__Product_S__Produ__15702A09">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_Supplier" EntitySet="Product_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_S__Suppl__16644E42" Association="Self.FK__Product_S__Suppl__16644E42">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Product_Supplier" EntitySet="Product_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__Customer___1A34DF26" Association="Self.FK__Sales__Customer___1A34DF26">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__Journal_I__1B29035F" Association="Self.FK__Sales__Journal_I__1B29035F">
+            <End Role="Journal" EntitySet="Journal" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sub_Accou__Main___4E1E9780" Association="Self.FK__Sub_Accou__Main___4E1E9780">
+            <End Role="Main_Accounts" EntitySet="Main_Accounts" />
+            <End Role="Sub_Accounts" EntitySet="Sub_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Supplier__Addres__3D2915A8" Association="Self.FK__Supplier__Addres__3D2915A8">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Supplier" EntitySet="Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Support__Voucher__035179CE" Association="Self.FK__Support__Voucher__035179CE">
+            <End Role="Journal" EntitySet="Journal" />
+            <End Role="Support" EntitySet="Support" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voucher_D__Sub_A__52E34C9D" Association="Self.FK__Voucher_D__Sub_A__52E34C9D">
+            <End Role="Sub_Accounts" EntitySet="Sub_Accounts" />
+            <End Role="Journal_Details" EntitySet="Journal_Details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="POSNew12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Bank_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Name" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Account_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Openning__Balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsPrimary" Type="Boolean" />
+          <Property Name="Credit_Limit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Current_Balance" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Postal_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Addres__4D2A7347" FromRole="Address" ToRole="Employee" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK__Login__Address_I__6ABAD62E" FromRole="Address" ToRole="Login" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Supplier__Addres__3D2915A8" FromRole="Address" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="Barcode_Serial" />
+          </Key>
+          <Property Name="Barcode_Serial" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Barcode__Product__29221CFB" FromRole="Barcode" ToRole="Product" />
+          <NavigationProperty Name="Gift" Relationship="Self.FK__Gift__Barcode__36B12243" FromRole="Barcode" ToRole="Gift" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone2" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__Customer___1A34DF26" FromRole="Customer" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Customer_Sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoice_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Unit_Price" Type="Int32" />
+          <Property Name="Sold_Price" Type="Int32" />
+          <Property Name="Sale_Price_was" Type="Int32" />
+          <Property Name="Sold_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK__Customer___Invoi__184C96B4" FromRole="Customer_Sale" ToRole="Sales" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Customer___Produ__2A164134" FromRole="Customer_Sale" ToRole="Product" />
+          <NavigationProperty Name="Gifts" Relationship="Self.FK__Gift__Customer_S__37A5467C" FromRole="Customer_Sale" ToRole="Gift" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Login" Type="DateTime" Precision="3" />
+          <Property Name="User_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_ID" Type="Int32" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Manager_ID" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Employee__Addres__4D2A7347" FromRole="Employee" ToRole="Address" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK__Employee__Manage__4C364F0E" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="Self.FK__Employee__Manage__4C364F0E" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK__Login__Manager_I__69C6B1F5" FromRole="Employee" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Free_Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoice_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK__Free_Prod__Invoi__1940BAED" FromRole="Free_Product" ToRole="Sales" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Free_Prod__Produ__2B0A656D" FromRole="Free_Product" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Gift">
+          <Key>
+            <PropertyRef Name="Barcode" />
+          </Key>
+          <Property Name="Barcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Sale_ID" Type="Int32" Nullable="false" />
+          <Property Name="SL" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Gift_Code" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Discount_Price" Type="Int32" />
+          <NavigationProperty Name="Barcode1" Relationship="Self.FK__Gift__Barcode__36B12243" FromRole="Gift" ToRole="Barcode" />
+          <NavigationProperty Name="Customer_Sale" Relationship="Self.FK__Gift__Customer_S__37A5467C" FromRole="Gift" ToRole="Customer_Sale" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Sub_Account_ID" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PreparedBy" Type="Int32" />
+          <Property Name="AuthenticatedBy" Type="Int32" />
+          <NavigationProperty Name="Login" Relationship="Self.FK__Journal__Authent__062DE679" FromRole="Journal" ToRole="Login" />
+          <NavigationProperty Name="Login1" Relationship="Self.FK__Journal__Prepare__0539C240" FromRole="Journal" ToRole="Login" />
+          <NavigationProperty Name="Sub_Accounts" Relationship="Self.FK__Journal__Sub_Acc__07220AB2" FromRole="Journal" ToRole="Sub_Accounts" />
+          <NavigationProperty Name="Journal_Details" Relationship="Self.FK__Journal_D__Journ__04459E07" FromRole="Journal" ToRole="Journal_Details" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Journal__39AD8A7F" FromRole="Journal" ToRole="Payment" />
+          <NavigationProperty Name="Product_Supplier" Relationship="Self.FK__Product_S__Journ__1758727B" FromRole="Journal" ToRole="Product_Supplier" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__Journal_I__1B29035F" FromRole="Journal" ToRole="Sales" />
+          <NavigationProperty Name="Supports" Relationship="Self.FK__Support__Voucher__035179CE" FromRole="Journal" ToRole="Support" />
+        </EntityType>
+        <EntityType Name="Journal_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Journal_ID" Type="Int32" />
+          <Property Name="SNO" Type="Int32" />
+          <Property Name="Sub_Account_ID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Narration" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Journal" Relationship="Self.FK__Journal_D__Journ__04459E07" FromRole="Journal_Details" ToRole="Journal" />
+          <NavigationProperty Name="Sub_Accounts" Relationship="Self.FK__Voucher_D__Sub_A__52E34C9D" FromRole="Journal_Details" ToRole="Sub_Accounts" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Login" Type="DateTime" Precision="3" />
+          <Property Name="User_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_ID" Type="Int32" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Manager_ID" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Login__Address_I__6ABAD62E" FromRole="Login" ToRole="Address" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Login__Manager_I__69C6B1F5" FromRole="Login" ToRole="Employee" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK__Journal__Authent__062DE679" FromRole="Login" ToRole="Journal" />
+          <NavigationProperty Name="Journals1" Relationship="Self.FK__Journal__Prepare__0539C240" FromRole="Login" ToRole="Journal" />
+        </EntityType>
+        <EntityType Name="Main_Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Catagory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sub_Accounts" Relationship="Self.FK__Sub_Accou__Main___4E1E9780" FromRole="Main_Accounts" ToRole="Sub_Accounts" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Payment_For_Whom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Payment_For_ID" Type="Int32" />
+          <Property Name="Journal_ID" Type="Int32" />
+          <NavigationProperty Name="Journal" Relationship="Self.FK__Payment__Journal__39AD8A7F" FromRole="Payment" ToRole="Journal" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity_Available" Type="Int32" />
+          <Property Name="Quantity_Sold" Type="Int32" />
+          <Property Name="Unit_Price" Type="Int32" />
+          <Property Name="Selling_Price" Type="Int32" />
+          <Property Name="Des" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <Property Name="Unique_Barcode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Barcodes" Relationship="Self.FK__Barcode__Product__29221CFB" FromRole="Product" ToRole="Barcode" />
+          <NavigationProperty Name="Customer_Sale" Relationship="Self.FK__Customer___Produ__2A164134" FromRole="Product" ToRole="Customer_Sale" />
+          <NavigationProperty Name="Free_Product" Relationship="Self.FK__Free_Prod__Produ__2B0A656D" FromRole="Product" ToRole="Free_Product" />
+          <NavigationProperty Name="Product_Supplier" Relationship="Self.FK__Product_S__Produ__15702A09" FromRole="Product" ToRole="Product_Supplier" />
+        </EntityType>
+        <EntityType Name="Product_Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ref_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Supplier_ID" Type="Int32" />
+          <Property Name="Journal_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Unit_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Journal" Relationship="Self.FK__Product_S__Journ__1758727B" FromRole="Product_Supplier" ToRole="Journal" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product_S__Produ__15702A09" FromRole="Product_Supplier" ToRole="Product" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK__Product_S__Suppl__16644E42" FromRole="Product_Supplier" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Invoice_ID" />
+          </Key>
+          <Property Name="Invoice_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Journal_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Sales__Customer___1A34DF26" FromRole="Sales" ToRole="Customer" />
+          <NavigationProperty Name="Customer_Sale" Relationship="Self.FK__Customer___Invoi__184C96B4" FromRole="Sales" ToRole="Customer_Sale" />
+          <NavigationProperty Name="Free_Product" Relationship="Self.FK__Free_Prod__Invoi__1940BAED" FromRole="Sales" ToRole="Free_Product" />
+          <NavigationProperty Name="Journal" Relationship="Self.FK__Sales__Journal_I__1B29035F" FromRole="Sales" ToRole="Journal" />
+        </EntityType>
+        <EntityType Name="Sub_Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Main_Accounts_ID" Type="Int32" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK__Journal__Sub_Acc__07220AB2" FromRole="Sub_Accounts" ToRole="Journal" />
+          <NavigationProperty Name="Journal_Details" Relationship="Self.FK__Voucher_D__Sub_A__52E34C9D" FromRole="Sub_Accounts" ToRole="Journal_Details" />
+          <NavigationProperty Name="Main_Accounts" Relationship="Self.FK__Sub_Accou__Main___4E1E9780" FromRole="Sub_Accounts" ToRole="Main_Accounts" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address_ID" Type="Int32" Nullable="false" />
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Designation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Supplier__Addres__3D2915A8" FromRole="Supplier" ToRole="Address" />
+          <NavigationProperty Name="Product_Supplier" Relationship="Self.FK__Product_S__Suppl__16644E42" FromRole="Supplier" ToRole="Product_Supplier" />
+        </EntityType>
+        <EntityType Name="Support">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Voucher_ID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Journal" Relationship="Self.FK__Support__Voucher__035179CE" FromRole="Support" ToRole="Journal" />
+        </EntityType>
+        <Association Name="FK__Employee__Addres__4D2A7347">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Login__Address_I__6ABAD62E">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Supplier__Addres__3D2915A8">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Barcode__Product__29221CFB">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Barcode" Type="Self.Barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Barcode">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Gift__Barcode__36B12243">
+          <End Role="Barcode" Type="Self.Barcode" Multiplicity="1" />
+          <End Role="Gift" Type="Self.Gift" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Barcode">
+              <PropertyRef Name="Barcode_Serial" />
+            </Principal>
+            <Dependent Role="Gift">
+              <PropertyRef Name="Barcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__Customer___1A34DF26">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer___Invoi__184C96B4">
+          <End Role="Sales" Type="Self.Sale" Multiplicity="1" />
+          <End Role="Customer_Sale" Type="Self.Customer_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Customer_Sale">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer___Produ__2A164134">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Customer_Sale" Type="Self.Customer_Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer_Sale">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Gift__Customer_S__37A5467C">
+          <End Role="Customer_Sale" Type="Self.Customer_Sale" Multiplicity="1" />
+          <End Role="Gift" Type="Self.Gift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer_Sale">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Gift">
+              <PropertyRef Name="Customer_Sale_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Manage__4C364F0E">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Login__Manager_I__69C6B1F5">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Free_Prod__Invoi__1940BAED">
+          <End Role="Sales" Type="Self.Sale" Multiplicity="1" />
+          <End Role="Free_Product" Type="Self.Free_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Free_Product">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Free_Prod__Produ__2B0A656D">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Free_Product" Type="Self.Free_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Free_Product">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal__Authent__062DE679">
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="AuthenticatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal__Prepare__0539C240">
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="PreparedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal__Sub_Acc__07220AB2">
+          <End Role="Sub_Accounts" Type="Self.Sub_Accounts" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="Sub_Account_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Journal_D__Journ__04459E07">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Journal_Details" Type="Self.Journal_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal_Details">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Journal__39AD8A7F">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_S__Journ__1758727B">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Product_Supplier" Type="Self.Product_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_Supplier">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__Journal_I__1B29035F">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="Journal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Support__Voucher__035179CE">
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <End Role="Support" Type="Self.Support" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Support">
+              <PropertyRef Name="Voucher_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Voucher_D__Sub_A__52E34C9D">
+          <End Role="Sub_Accounts" Type="Self.Sub_Accounts" Multiplicity="0..1" />
+          <End Role="Journal_Details" Type="Self.Journal_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Journal_Details">
+              <PropertyRef Name="Sub_Account_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sub_Accou__Main___4E1E9780">
+          <End Role="Main_Accounts" Type="Self.Main_Accounts" Multiplicity="0..1" />
+          <End Role="Sub_Accounts" Type="Self.Sub_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Main_Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sub_Accounts">
+              <PropertyRef Name="Main_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_S__Produ__15702A09">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Supplier" Type="Self.Product_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_Supplier">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_S__Suppl__16644E42">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Product_Supplier" Type="Self.Product_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_Supplier">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Barcodes" EntityType="Self.Barcode" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Customer_Sale" EntityType="Self.Customer_Sale" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Free_Product" EntityType="Self.Free_Product" />
+          <EntitySet Name="Gifts" EntityType="Self.Gift" />
+          <EntitySet Name="Journals" EntityType="Self.Journal" />
+          <EntitySet Name="Journal_Details" EntityType="Self.Journal_Details" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="Main_Accounts" EntityType="Self.Main_Accounts" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Product_Supplier" EntityType="Self.Product_Supplier" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Sub_Accounts" EntityType="Self.Sub_Accounts" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="Supports" EntityType="Self.Support" />
+          <AssociationSet Name="FK__Employee__Addres__4D2A7347" Association="Self.FK__Employee__Addres__4D2A7347">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Login__Address_I__6ABAD62E" Association="Self.FK__Login__Address_I__6ABAD62E">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Login" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Supplier__Addres__3D2915A8" Association="Self.FK__Supplier__Addres__3D2915A8">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Barcode__Product__29221CFB" Association="Self.FK__Barcode__Product__29221CFB">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Barcode" EntitySet="Barcodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Gift__Barcode__36B12243" Association="Self.FK__Gift__Barcode__36B12243">
+            <End Role="Barcode" EntitySet="Barcodes" />
+            <End Role="Gift" EntitySet="Gifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__Customer___1A34DF26" Association="Self.FK__Sales__Customer___1A34DF26">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer___Invoi__184C96B4" Association="Self.FK__Customer___Invoi__184C96B4">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Customer_Sale" EntitySet="Customer_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer___Produ__2A164134" Association="Self.FK__Customer___Produ__2A164134">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Customer_Sale" EntitySet="Customer_Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Gift__Customer_S__37A5467C" Association="Self.FK__Gift__Customer_S__37A5467C">
+            <End Role="Customer_Sale" EntitySet="Customer_Sale" />
+            <End Role="Gift" EntitySet="Gifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Manage__4C364F0E" Association="Self.FK__Employee__Manage__4C364F0E">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Login__Manager_I__69C6B1F5" Association="Self.FK__Login__Manager_I__69C6B1F5">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Login" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Free_Prod__Invoi__1940BAED" Association="Self.FK__Free_Prod__Invoi__1940BAED">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Free_Product" EntitySet="Free_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Free_Prod__Produ__2B0A656D" Association="Self.FK__Free_Prod__Produ__2B0A656D">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Free_Product" EntitySet="Free_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal__Authent__062DE679" Association="Self.FK__Journal__Authent__062DE679">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Journal" EntitySet="Journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal__Prepare__0539C240" Association="Self.FK__Journal__Prepare__0539C240">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Journal" EntitySet="Journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal__Sub_Acc__07220AB2" Association="Self.FK__Journal__Sub_Acc__07220AB2">
+            <End Role="Sub_Accounts" EntitySet="Sub_Accounts" />
+            <End Role="Journal" EntitySet="Journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Journal_D__Journ__04459E07" Association="Self.FK__Journal_D__Journ__04459E07">
+            <End Role="Journal" EntitySet="Journals" />
+            <End Role="Journal_Details" EntitySet="Journal_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Journal__39AD8A7F" Association="Self.FK__Payment__Journal__39AD8A7F">
+            <End Role="Journal" EntitySet="Journals" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_S__Journ__1758727B" Association="Self.FK__Product_S__Journ__1758727B">
+            <End Role="Journal" EntitySet="Journals" />
+            <End Role="Product_Supplier" EntitySet="Product_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__Journal_I__1B29035F" Association="Self.FK__Sales__Journal_I__1B29035F">
+            <End Role="Journal" EntitySet="Journals" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Support__Voucher__035179CE" Association="Self.FK__Support__Voucher__035179CE">
+            <End Role="Journal" EntitySet="Journals" />
+            <End Role="Support" EntitySet="Supports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Voucher_D__Sub_A__52E34C9D" Association="Self.FK__Voucher_D__Sub_A__52E34C9D">
+            <End Role="Sub_Accounts" EntitySet="Sub_Accounts" />
+            <End Role="Journal_Details" EntitySet="Journal_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sub_Accou__Main___4E1E9780" Association="Self.FK__Sub_Accou__Main___4E1E9780">
+            <End Role="Main_Accounts" EntitySet="Main_Accounts" />
+            <End Role="Sub_Accounts" EntitySet="Sub_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_S__Produ__15702A09" Association="Self.FK__Product_S__Produ__15702A09">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Supplier" EntitySet="Product_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_S__Suppl__16644E42" Association="Self.FK__Product_S__Suppl__16644E42">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product_Supplier" EntitySet="Product_Supplier" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="POSNew12ModelStoreContainer" CdmEntityContainer="POSDBEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="POSNew12Model.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Bank_Name" ColumnName="Bank_Name" />
+                <ScalarProperty Name="Account_Name" ColumnName="Account_Name" />
+                <ScalarProperty Name="Account_No" ColumnName="Account_No" />
+                <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+                <ScalarProperty Name="Openning__Balance" ColumnName="Openning_ Balance" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="Credit_Limit" ColumnName="Credit_Limit" />
+                <ScalarProperty Name="Current_Balance" ColumnName="Current_Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="POSNew12Model.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+                <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barcodes">
+            <EntityTypeMapping TypeName="POSNew12Model.Barcode">
+              <MappingFragment StoreEntitySet="Barcode">
+                <ScalarProperty Name="Barcode_Serial" ColumnName="Barcode_Serial" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="POSNew12Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Sale">
+            <EntityTypeMapping TypeName="POSNew12Model.Customer_Sale">
+              <MappingFragment StoreEntitySet="Customer_Sale">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+                <ScalarProperty Name="Sold_Price" ColumnName="Sold_Price" />
+                <ScalarProperty Name="Sale_Price_was" ColumnName="Sale_Price_was" />
+                <ScalarProperty Name="Sold_By" ColumnName="Sold_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="POSNew12Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Last_Login" ColumnName="Last_Login" />
+                <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+                <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Free_Product">
+            <EntityTypeMapping TypeName="POSNew12Model.Free_Product">
+              <MappingFragment StoreEntitySet="Free_Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gifts">
+            <EntityTypeMapping TypeName="POSNew12Model.Gift">
+              <MappingFragment StoreEntitySet="Gift">
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Customer_Sale_ID" ColumnName="Customer_Sale_ID" />
+                <ScalarProperty Name="SL" ColumnName="SL" />
+                <ScalarProperty Name="Gift_Code" ColumnName="Gift Code" />
+                <ScalarProperty Name="Discount_Price" ColumnName="Discount Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journals">
+            <EntityTypeMapping TypeName="POSNew12Model.Journal">
+              <MappingFragment StoreEntitySet="Journal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sub_Account_ID" ColumnName="Sub_Account_ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PreparedBy" ColumnName="PreparedBy" />
+                <ScalarProperty Name="AuthenticatedBy" ColumnName="AuthenticatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journal_Details">
+            <EntityTypeMapping TypeName="POSNew12Model.Journal_Details">
+              <MappingFragment StoreEntitySet="Journal_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Journal_ID" ColumnName="Journal_ID" />
+                <ScalarProperty Name="SNO" ColumnName="SNO" />
+                <ScalarProperty Name="Sub_Account_ID" ColumnName="Sub_Account_ID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="POSNew12Model.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Last_Login" ColumnName="Last_Login" />
+                <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+                <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Main_Accounts">
+            <EntityTypeMapping TypeName="POSNew12Model.Main_Accounts">
+              <MappingFragment StoreEntitySet="Main_Accounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Catagory" ColumnName="Catagory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="POSNew12Model.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Payment_For_Whom" ColumnName="Payment_For_Whom" />
+                <ScalarProperty Name="Payment_For_ID" ColumnName="Payment_For_ID" />
+                <ScalarProperty Name="Journal_ID" ColumnName="Journal_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="POSNew12Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Quantity_Available" ColumnName="Quantity_Available" />
+                <ScalarProperty Name="Quantity_Sold" ColumnName="Quantity_Sold" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+                <ScalarProperty Name="Selling_Price" ColumnName="Selling_Price" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="Unique_Barcode" ColumnName="Unique_Barcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Supplier">
+            <EntityTypeMapping TypeName="POSNew12Model.Product_Supplier">
+              <MappingFragment StoreEntitySet="Product_Supplier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ref_Number" ColumnName="Ref_Number" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Journal_ID" ColumnName="Journal_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="POSNew12Model.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Journal_ID" ColumnName="Journal_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sub_Accounts">
+            <EntityTypeMapping TypeName="POSNew12Model.Sub_Accounts">
+              <MappingFragment StoreEntitySet="Sub_Accounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Main_Accounts_ID" ColumnName="Main_Accounts_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="POSNew12Model.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Contact_Name" ColumnName="Contact_Name" />
+                <ScalarProperty Name="Contact_Designation" ColumnName="Contact_Designation" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supports">
+            <EntityTypeMapping TypeName="POSNew12Model.Support">
+              <MappingFragment StoreEntitySet="Support">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Voucher_ID" ColumnName="Voucher_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
