@@ -30,14 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -49,106 +52,104 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Address.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Barcode.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer_Sale.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Free_Product.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Gift.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Journal.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Journal_Details.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Main_Accounts.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Payment.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
-    <Compile Include="POSDBContext.Context.cs">
+    <Compile Include="POS_ADO.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>POSDBContext.Context.tt</DependentUpon>
+      <DependentUpon>POS_ADO.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="POSDBContext.cs">
+    <Compile Include="POS_ADO.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
-    <Compile Include="POSDBContext.Designer.cs">
+    <Compile Include="POS_ADO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>POSDBContext.edmx</DependentUpon>
+      <DependentUpon>POS_ADO.edmx</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Product_Supplier.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Sub_Accounts.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Supplier.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
     <Compile Include="Support.cs">
-      <DependentUpon>POSDBContext.tt</DependentUpon>
+      <DependentUpon>POS_ADO.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="POSDBContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>POSDBContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="POSDBContext.edmx.diagram">
-      <DependentUpon>POSDBContext.edmx</DependentUpon>
+    <EntityDeploy Include="POS_ADO.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>POS_ADO.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="POS_ADO.edmx.diagram">
+      <DependentUpon>POS_ADO.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="POSDBContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>POSDBContext.Context.cs</LastGenOutput>
-      <DependentUpon>POSDBContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="POSDBContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>POSDBContext.edmx</DependentUpon>
-      <LastGenOutput>POSDBContext.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="POS_ADO.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POS_ADO.edmx</DependentUpon>
+      <LastGenOutput>POS_ADO.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="POS_ADO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POS_ADO.edmx</DependentUpon>
+      <LastGenOutput>POS_ADO.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

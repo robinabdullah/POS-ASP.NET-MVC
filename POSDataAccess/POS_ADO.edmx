@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="POSNew12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="POSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,7 +47,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
           <Property Name="Phone2" Type="int" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -516,7 +516,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="POSNew12ModelStoreContainer">
+        <EntityContainer Name="POSDBModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Barcode" EntityType="Self.Barcode" Schema="dbo" store:Type="Tables" />
@@ -641,7 +641,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="POSNew12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="POSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="ID" />
@@ -689,7 +689,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Phone2" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__Customer___1A34DF26" FromRole="Customer" ToRole="Sales" />
@@ -1200,7 +1200,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="POSDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="POSDBContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Barcodes" EntityType="Self.Barcode" />
@@ -1326,9 +1326,9 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="POSNew12ModelStoreContainer" CdmEntityContainer="POSDBEntities">
+        <EntityContainerMapping StorageEntityContainer="POSDBModelStoreContainer" CdmEntityContainer="POSDBContext">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="POSNew12Model.Account">
+            <EntityTypeMapping TypeName="POSDBModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Bank_Name" ColumnName="Bank_Name" />
@@ -1343,7 +1343,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
-            <EntityTypeMapping TypeName="POSNew12Model.Address">
+            <EntityTypeMapping TypeName="POSDBModel.Address">
               <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="City" ColumnName="City" />
@@ -1358,7 +1358,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Barcodes">
-            <EntityTypeMapping TypeName="POSNew12Model.Barcode">
+            <EntityTypeMapping TypeName="POSDBModel.Barcode">
               <MappingFragment StoreEntitySet="Barcode">
                 <ScalarProperty Name="Barcode_Serial" ColumnName="Barcode_Serial" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
@@ -1368,7 +1368,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="POSNew12Model.Customer">
+            <EntityTypeMapping TypeName="POSDBModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1378,7 +1378,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customer_Sale">
-            <EntityTypeMapping TypeName="POSNew12Model.Customer_Sale">
+            <EntityTypeMapping TypeName="POSDBModel.Customer_Sale">
               <MappingFragment StoreEntitySet="Customer_Sale">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
@@ -1392,7 +1392,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="POSNew12Model.Employee">
+            <EntityTypeMapping TypeName="POSDBModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1407,7 +1407,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Free_Product">
-            <EntityTypeMapping TypeName="POSNew12Model.Free_Product">
+            <EntityTypeMapping TypeName="POSDBModel.Free_Product">
               <MappingFragment StoreEntitySet="Free_Product">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
@@ -1416,7 +1416,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gifts">
-            <EntityTypeMapping TypeName="POSNew12Model.Gift">
+            <EntityTypeMapping TypeName="POSDBModel.Gift">
               <MappingFragment StoreEntitySet="Gift">
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="Customer_Sale_ID" ColumnName="Customer_Sale_ID" />
@@ -1427,7 +1427,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Journals">
-            <EntityTypeMapping TypeName="POSNew12Model.Journal">
+            <EntityTypeMapping TypeName="POSDBModel.Journal">
               <MappingFragment StoreEntitySet="Journal">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1440,7 +1440,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Journal_Details">
-            <EntityTypeMapping TypeName="POSNew12Model.Journal_Details">
+            <EntityTypeMapping TypeName="POSDBModel.Journal_Details">
               <MappingFragment StoreEntitySet="Journal_Details">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Journal_ID" ColumnName="Journal_ID" />
@@ -1452,7 +1452,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logins">
-            <EntityTypeMapping TypeName="POSNew12Model.Login">
+            <EntityTypeMapping TypeName="POSDBModel.Login">
               <MappingFragment StoreEntitySet="Login">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1467,7 +1467,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Main_Accounts">
-            <EntityTypeMapping TypeName="POSNew12Model.Main_Accounts">
+            <EntityTypeMapping TypeName="POSDBModel.Main_Accounts">
               <MappingFragment StoreEntitySet="Main_Accounts">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Catagory" ColumnName="Catagory" />
@@ -1475,7 +1475,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="POSNew12Model.Payment">
+            <EntityTypeMapping TypeName="POSDBModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Payment_For_Whom" ColumnName="Payment_For_Whom" />
@@ -1485,7 +1485,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="POSNew12Model.Product">
+            <EntityTypeMapping TypeName="POSDBModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -1501,7 +1501,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product_Supplier">
-            <EntityTypeMapping TypeName="POSNew12Model.Product_Supplier">
+            <EntityTypeMapping TypeName="POSDBModel.Product_Supplier">
               <MappingFragment StoreEntitySet="Product_Supplier">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Ref_Number" ColumnName="Ref_Number" />
@@ -1515,7 +1515,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sales">
-            <EntityTypeMapping TypeName="POSNew12Model.Sale">
+            <EntityTypeMapping TypeName="POSDBModel.Sale">
               <MappingFragment StoreEntitySet="Sales">
                 <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
                 <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
@@ -1525,7 +1525,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sub_Accounts">
-            <EntityTypeMapping TypeName="POSNew12Model.Sub_Accounts">
+            <EntityTypeMapping TypeName="POSDBModel.Sub_Accounts">
               <MappingFragment StoreEntitySet="Sub_Accounts">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1534,7 +1534,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="POSNew12Model.Supplier">
+            <EntityTypeMapping TypeName="POSDBModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
@@ -1546,7 +1546,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Supports">
-            <EntityTypeMapping TypeName="POSNew12Model.Support">
+            <EntityTypeMapping TypeName="POSDBModel.Support">
               <MappingFragment StoreEntitySet="Support">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Voucher_ID" ColumnName="Voucher_ID" />
@@ -1570,7 +1570,7 @@ warning 6035: The relationship 'FK__Customer___Sold___68D28DBC' has columns that
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\Git\POS-ASP.NET-MVC\POSDataAccess\POSDBContext.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\Using soft\programming\Programmings\Github Repos\POS ASP.NET MVC\POSDataAccess\POS_ADO.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
