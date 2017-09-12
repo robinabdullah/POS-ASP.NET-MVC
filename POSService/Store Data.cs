@@ -14,8 +14,40 @@ using System.Data;
 
 namespace POSService
 {
-    
-    class DB
+    //Choose Option
+    //1. Create A file
+    //2. Create then write something in that file
+    //3. Append a file
+    //4. Read a file
+
+    /*Press (1-4): 1
+    Enter File name: test2.txt
+    file created successfully-- test2.txt
+    */
+
+    /*Press (1-4): 2
+    Enter File name: test3.txt
+    Enter number of line: 2
+    Enter Line 1: First Line
+    Enter Line 2: Second Line
+    file create the write completed test3.txt
+    */
+
+    /*Press (1-4): 3
+    Enter File name: test3.txt
+    Enter number of line: 1
+    Enter Line 1: Third Line
+    file appedn completed test3.txt
+    */
+
+    /*Press (1-4): 4
+    Enter File name: test3.txt
+    First Line
+    Second Line
+    Third Line
+    file read completed test3.txt
+    */
+    public class DB
     {
         public static POSDBContext db = new POSDBContext();
         public static void resetConnString()
@@ -43,10 +75,10 @@ namespace POSService
             try
             {
                 /// Hangs if connectionString is invalid rather than throw an exception
-                db.Connection.Open();
+                db.Database.Connection.Open();
 
                 /// Initially, I was just trying to call DatabaseExists but, this hangs as well if the conn string is invalid
-                if (!db.DatabaseExists())
+                if (!db.Database.Exists())
                 {
                     result = false;
                     throw new Exception("Database doesn't exist.");
@@ -150,7 +182,7 @@ namespace POSService
             }
         }
     }
-    class ProductTableData : DB
+    public class ProductTableData : DB
     {
         public static IQueryable<Product> getAllProducts()
         {
@@ -273,8 +305,11 @@ namespace POSService
                 pro.Date_Updated = date;
                 if(barcode.Count() > 0)
                 {
-                    if(uniqueBarcode.StartsWith("NY") == false)                    
-                        pro.Barcodes.AddRange(barcode);
+                    if(uniqueBarcode.StartsWith("NY") == false)
+                        foreach (var item in barcode)
+                        {
+                            pro.Barcodes.Add(item);
+                        }
                     else if (uniqueBarcode.StartsWith("NY") == true)
                     {
                         if (pro.Barcodes.Count == 0) pro.Barcodes.Add(barcode.First());
@@ -440,9 +475,9 @@ namespace POSService
                 if (pro.Quantity_Sold == 0)
                 {
                     
-                    db.Barcodes.DeleteAllOnSubmit(pro.Barcodes);
-                    db.Products.DeleteOnSubmit(pro);
-                    db.SubmitChanges();
+                    db.Barcodes.RemoveRange(pro.Barcodes);
+                    db.Products.Remove(pro);
+                    db.SaveChanges();
                     return true;
                 }
                 else
@@ -481,8 +516,8 @@ namespace POSService
 
                 pro.Quantity_Available -= 1; // 1 barcode deleted then quantity is decresed by -1
 
-                db.Barcodes.DeleteOnSubmit(barcodes);
-                db.SubmitChanges();
+                db.Barcodes.Remove(barcodes);
+                db.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -1067,7 +1102,7 @@ namespace POSService
         {
             try
             {
-                var v = (from e in db.Customer_Sales
+                var v = (from e in db.Customer_Sale
                         where e.Invoice_ID == invoiceID 
                         select e).ToList();
 
@@ -1098,14 +1133,14 @@ namespace POSService
                                   select ee).ToList();
 
                 if (freeProducts.Count != 0)
-                    db.Free_Product.DeleteOnSubmit(freeProducts.First());
+                    db.Free_Product.Remove(freeProducts.First());
 
                 product.Quantity_Available += quan;
                 product.Quantity_Sold -= quan;
 
                 if (cus_sale.Gifts.Count != 0)
                 {
-                    db.Gifts.DeleteAllOnSubmit(cus_sale.Gifts); // delete gift if product has same or unq barcode
+                    db.Gifts.RemoveRange(cus_sale.Gifts); // delete gift if product has same or unq barcode
                 }
 
                 if( count == 1 )
@@ -1113,12 +1148,12 @@ namespace POSService
                     var sale = (from ee in db.Sales
                                 where ee.Invoice_ID == cus_sale.Invoice_ID
                                 select ee).First();
-                    db.Sales.DeleteOnSubmit(sale);
+                    db.Sales.Remove(sale);
                 }
 
-                db.Customer_Sales.DeleteOnSubmit(cus_sale);
+                db.Customer_Sale.Remove(cus_sale);
 
-                db.SubmitChanges();
+                db.SaveChanges();
 
                 return true;
             }
@@ -1148,7 +1183,7 @@ namespace POSService
             //POSDataContext db = new POSDataContext(ConnectionString.connectionStringLinq);
             try
             {
-                var temp1 = (from xx in db.Customer_Sales
+                var temp1 = (from xx in db.Customer_Sale
                              where xx.Product == product orderby xx.ID descending
                              select xx).ToList();
                 return temp1;

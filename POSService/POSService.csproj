@@ -62,14 +62,6 @@
       <Project>{c47804ef-9632-457f-be6b-9f6b0c6b41a0}</Project>
       <Name>POSDataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\POSData\POSData.csproj">
-      <Project>{92b79971-263d-4155-8207-7bb2c20bf1a6}</Project>
-      <Name>POSData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\POSEntity\POSEntity.csproj">
-      <Project>{7fec3d1b-30b7-4770-afb5-8d0835707c80}</Project>
-      <Name>POSEntity</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

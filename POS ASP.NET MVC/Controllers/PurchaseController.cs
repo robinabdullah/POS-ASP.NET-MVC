@@ -12,8 +12,8 @@ namespace POS_ASP.NET_MVC.Controllers
         // GET: Purchase
         public ActionResult Index()
         {
-            //List<string> array = service.GetAll().Select(x => x.Type).ToList();
-            ViewData["supplierList"] = new[] { "Select"};
+            string[] array = ProductTableData.getAllProductTypes().ToArray();
+            ViewData["supplierList"] = array;
             return View();
         }
     }
