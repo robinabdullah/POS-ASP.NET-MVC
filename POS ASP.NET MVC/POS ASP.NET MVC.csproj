@@ -116,6 +116,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\myScript.js" />
     <Content Include="Scripts\ScriptPurchase.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -127,6 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Others.cs" />
     <Compile Include="Models\Validation Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,6 +150,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\POSDataAccess\POSDataAccess.csproj">
+      <Project>{c47804ef-9632-457f-be6b-9f6b0c6b41a0}</Project>
+      <Name>POSDataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\POSService\POSService.csproj">
       <Project>{4fcc2ba6-2f47-4226-b446-c2870a830eb0}</Project>
       <Name>POSService</Name>

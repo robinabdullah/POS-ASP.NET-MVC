@@ -97,7 +97,7 @@ namespace POSService
             return result;
         }
     }
-    class JurnalTable_Data: DB
+    public class JurnalTable_Data : DB
     {
 
         public static bool PostPurchaseJournal(Journal j, List<Product_Supplier> listProduct_Supplier, List<Journal_Details> listJournal_Details, int amount, double paymentDue)
@@ -642,7 +642,7 @@ namespace POSService
             }
         }
     }
-    class SupplierTableData: DB
+    public class SupplierTableData : DB
     {
         public static bool addNewSupplier(Supplier supplier)
         {
@@ -1195,7 +1195,7 @@ namespace POSService
 
         }
     }
-    class Sale_TableData : DB
+    public class Sale_TableData : DB
     {
         public static List<Sale> getSalesbyCustomerID(int cus_id)
         {

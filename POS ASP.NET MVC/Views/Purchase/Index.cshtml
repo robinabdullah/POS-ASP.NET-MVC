@@ -18,11 +18,32 @@
                     dateFormat: "dd/mm/yy"
                 });
             });
+            function Fill_DDL_PModel() {
+                var ID = $('#type').val();
+                $.ajax({
+                    url: '/Purchase/Fill_DDL_Model',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { Model: ID },
+                    success: function (model) {
+                        $("#model").html(""); // clear before appending new list 
+                        $.each(model, function (i, mm) {
+                            $("#model").append(
+                                $('<option></option>').val(mm.ID).html(mm.Model ));
+                        });
+                    }
+                });
+            }
+            $document.ready(function () {
+                var a = $("#model Option:Selected").text();
+                $("model").append(
+                     $('<option></option>').val(mm.ID).html(mm.Model));
+            })
     </script>
     
 </head>
 <body>
-    @using (Html.BeginForm()) 
+    @using (Html.BeginForm("Index", "Purchase", FormMethod.Post, new { id = "PurchaseForm", name = "PurchaseForm" }))
     {
         @Html.AntiForgeryToken()
         
@@ -50,15 +71,12 @@
                     <tr>
                         <td class="auto-style1"> Product Type </td>
                         <td>
-                            <select id="type" style="width:auto" class="form-control">
-                                <option> Select </option>
-                            </select>
+                            @Html.DropDownList("type", new SelectList(ViewData["typeList"] as string[]))
+                            
                         </td>
                         <td> Product Model </td>
                         <td colspan="3">
-                            <select id="model" style="width:auto">
-                                <option> Select </option>
-                            </select>
+                            @Html.DropDownList("model", new SelectList(new string[] { "Select"}), "Select", new { Class = "form-control", onChange="" })
                         </td>
                     </tr>
 
