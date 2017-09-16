@@ -12,113 +12,151 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
-            //Date Picker
-            $(function () {
-                $("#date").datepicker({
-                    dateFormat: "dd/mm/yy"
-                });
+        //Date Picker
+        $(function () {
+            $("#date").datepicker({
+                dateFormat: "dd/mm/yy"
             });
-            function Fill_DDL_PModel() {
-                var ID = $('#type').val();
-                $.ajax({
-                    url: '/Purchase/Fill_DDL_Model',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { Model: ID },
-                    success: function (model) {
-                        $("#model").html(""); // clear before appending new list 
-                        $.each(model, function (i, mm) {
-                            $("#model").append(
-                                $('<option></option>').val(mm.ID).html(mm.Model ));
-                        });
-                    }
-                });
-            }
-            $document.ready(function () {
-                var a = $("#model Option:Selected").text();
-                $("model").append(
-                     $('<option></option>').val(mm.ID).html(mm.Model));
-            })
+        });
+        function Fill_DDL_PModel() {
+            var ID = $('#type').val();
+            $.ajax({
+                url: '/Purchase/Fill_DDL_Model',
+                type: "GET",
+                dataType: "JSON",
+                data: { Model: ID },
+                success: function (model) {
+                    $("#model").html(""); // clear before appending new list
+                    $.each(model, function (i, mm) {
+                        $("#model").append(
+                            $('<option></option>').val(mm.ID).html(mm.Model));
+                    });
+                }
+            });
+        }
+        $document.ready(function () {
+            var a = $("#model Option:Selected").text();
+            $("model").append(
+                 $('<option></option>').val(mm.ID).html(mm.Model));
+        })
     </script>
-    
+
 </head>
 <body>
-    @using (Html.BeginForm("Index", "Purchase", FormMethod.Post, new { id = "PurchaseForm", name = "PurchaseForm" }))
+    @using (Html.BeginForm("Index", "Purchase", FormMethod.Post, new { id = "PurchaseForm1", name = "PurchaseForm1" }))
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
 
-                <table class="table table-responsive" style="width:auto">
-                    <tr>
-                        <td class="auto-style1"> Date </td>
-                        <td colspan="5"> <input type="text" value="@DateTime.Now.ToShortDateString()" id="date" /> </td>
-                    </tr>
+            <table class="table table-responsive" style="width:auto">
+                <tr>
+                    <td class="auto-style1"> Date </td>
+                    <td colspan="5">
+                        <input type="text" value="@DateTime.Now.ToShortDateString()" id="date" />
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="auto-style1"> Ref No </td>
-                        <td> <input type="text" id="refNo" /> </td>
-                        <td> Supplier </td>
-                        <td colspan="3">
-                            @*<select id="supplier" style="width:auto">
+                <tr>
+                    <td class="auto-style1"> Ref No </td>
+                    <td>
+                        <input type="text" id="refNo" />
+                    </td>
+                    <td> Supplier </td>
+                    <td colspan="3">
+                        @*<select id="supplier" style="width:auto">
                                 <option> Select </option>
                             </select>*@
-                            @Html.DropDownList("supplier", new SelectList(ViewData["supplierList"] as string[]))
+                        @Html.DropDownList("supplier", new SelectList(ViewData["supplierList"] as string[]), ViewData["selectedSupplier"] as string, new { Class = "form-control"})
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="auto-style1"> Product Type </td>
-                        <td>
-                            @Html.DropDownList("type", new SelectList(ViewData["typeList"] as string[]))
-                            
-                        </td>
-                        <td> Product Model </td>
-                        <td colspan="3">
-                            @Html.DropDownList("model", new SelectList(new string[] { "Select"}), "Select", new { Class = "form-control", onChange="" })
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="auto-style1"> Product Type </td>
+                    <td>
+                        @Html.DropDownList("type", new SelectList(ViewData["typeList"] as string[]), ViewData["selectedType"] as string, new { Class = "form-control", @onchange = "this.form.submit();" })
 
-                    <tr>
-                        <td class="auto-style1"> Product Quantity </td>
-                        <td> <input type="text" id="quantity" /> </td>
-                        <td> Unit price </td>
-                        <td class="auto-style2"> <input type="text" id="unitPrice" class="auto-style3" /> </td>
-                        <td> Sale price </td>
-                        <td> <input type="text" id="salePrice" /> </td>
-                    </tr>
+                    </td>
+                    <td> Product Model </td>
+                    <td colspan="3">
+                        @Html.DropDownList("model", new SelectList(ViewData["modelList"] as string[] ),ViewData["selectedModel"] as string, new { Class = "form-control" })
 
-                    <tr>
-                        <td class="auto-style1"> Barcode </td>
-                        <td> <input type="text" id="barcode" readonly="readonly" /> </td>
-                        <td> Barcode Serial </td>
-                        <td class="auto-style2">
-                            <input id="barcodeSerial" class="auto-style4" />
-                        </td>
-                        <td> Color </td>
-                        <td>
-                            <select id="color" style="width:auto">
-                                <option> Select </option>
-                            </select>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="auto-style1"> Description </td>
-                        <td colspan="5"> <input type="text" id="description" class="form-control" /> </td>
-                    </tr>
+                <tr>
+                    <td class="auto-style1"> Product Quantity </td>
+                    <td>
+                        <input type="text" id="quantity" />
+                    </td>
+                    <td> Unit price </td>
+                    <td class="auto-style2">
+                        <input type="text" id="unitPrice" class="auto-style3" />
+                    </td>
+                    <td> Sale price </td>
+                    <td>
+                        <input type="text" id="salePrice" />
+                    </td>
+                </tr>
 
-                </table>
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                <tr>
+                    <td class="auto-style1"> Barcode </td>
+                    <td>
+                        <input type="text" id="barcode" readonly="readonly" />
+                    </td>
+                    <td> Barcode Serial </td>
+                    <td class="auto-style2">
+                        <input id="barcodeSerial" class="auto-style4" />
+                    </td>
+                    <td> Color </td>
+                    <td>
+                        <select id="color" style="width:auto">
+                            <option> Select </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="auto-style1"> Description </td>
+                    <td colspan="5">
+                        <input type="text" id="description" class="form-control" />
+                    </td>
+                </tr>
+
+            </table>
+           
+            
         </div>
     }
-    
-    @*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
-    
+@using (Html.BeginForm("Index", "Purchase", FormMethod.Post, new { id = "PurchaseForm1", name = "PurchaseForm1" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <table style="width:100%;">
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+
+        </table>
+
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
 </body>
 </html>

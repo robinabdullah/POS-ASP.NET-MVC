@@ -11,6 +11,9 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using POSDataAccess;
 using System.Data;
+using Microsoft.SqlServer.Server;
+using System.Web;
+using System.Web.Hosting;
 
 namespace POSService
 {
@@ -622,7 +625,7 @@ namespace POSService
         //}
         
     }
-    class Product_SupplierTableData: DB
+    public class Product_SupplierTableData: DB
     {
         public static bool addNewProduct_Supplier(Product_Supplier pro_supplier)
         {
@@ -828,20 +831,20 @@ namespace POSService
         }
     }
    
-    class FileManagement
+    public class FileManagement
     { 
-        public static string filePath= Directory.GetCurrentDirectory() + @"\Files";
+        public static string filePath= HostingEnvironment.MapPath(@"~/Files");
 
-        public static string ProductTypePath = filePath + @"\Product Type.dat";
-        public static string ProductModelPath = filePath + @"\Product Model.dat";
-        public static string ColorPath = filePath + @"\Color.dat";
-        public static string ProductRegPath = filePath + @"\Product Reg.dat";
-        public static string ReceiptSavingLocation_datFile = filePath + @"\Receipt File Path.dat";
+        public static string ProductTypePath =  filePath + @"/Product Type.dat";
+        public static string ProductModelPath = filePath + @"/Product Model.dat";
+        public static string ColorPath = filePath + @"/Color.dat";
+        public static string ProductRegPath = filePath + @"/Product Reg.dat";
+        public static string ReceiptSavingLocation_datFile = filePath + @"/Receipt File Path.dat";
 
         public static string ReceiptSavingPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         
-        public static string receipt = filePath + @"\receipt form field.pdf";
-        public static string generatedReceipt = ReceiptSavingPath + @"\Fillied Receipt.pdf";
+        public static string receipt = filePath + @"/receipt form field.pdf";
+        public static string generatedReceipt = ReceiptSavingPath + @"/Fillied Receipt.pdf";
         private static void GrantAccess(string fullPath)
         {
             var directoryInfo = new DirectoryInfo(fullPath);

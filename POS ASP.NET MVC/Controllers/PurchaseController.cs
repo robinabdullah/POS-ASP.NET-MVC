@@ -18,12 +18,30 @@ namespace POS_ASP.NET_MVC.Controllers
             string[] types = ProductTableData.getAllProductTypes().ToArray();
             ViewData["supplierList"] = supplier;
             ViewData["typeList"] = types;
+            ViewData["modelList"] = new string[] { "Select" };
+            ViewData["selectedType"] = "Select";
+            ViewData["selectedSupplier"] = "Select";
+
             return View();
         }
-        public ActionResult Fill_DDL_Model()
+
+        [HttpPost]
+        public ActionResult Index(FormCollection collection)
         {
-            List<Models> models = ProductTableData.getAllProducts().Select(x => new Models { ID = x.ID, Model = x.Model }).ToList();
-            return new JsonResult { Data = models, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            string[] supplier = SupplierTableData.getAllSupplierName().ToArray();
+            string[] types = ProductTableData.getAllProductTypes().ToArray();
+            ViewData["supplierList"] = supplier;
+            ViewData["typeList"] = types;
+
+            string selected = collection["type"];
+            ViewData["selectedType"] = selected;
+            ViewData["selectedSupplier"] = collection["supplier"].ToString();
+            ViewData["selectedModel"] = "Select";
+
+            ViewData["modelList"] = ProductTableData.getAllTypeMachedModels(selected).ToArray();
+            return View();
         }
+
+        
     }
 }

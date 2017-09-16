@@ -16,7 +16,7 @@ namespace POS_ASP.NET_MVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Purchase", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "PurchaseTest", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

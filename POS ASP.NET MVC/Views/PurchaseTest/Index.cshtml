@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        var BarcodeTableData = [];
+        //Date Picker
+        $(function () {
+            $("#date").datepicker({
+                dateFormat: "dd/mm/yy"
+            });
+        });
+        
+        function loadDDL() {
+            var xmlhttp = new XMLHttpRequest();
+           var selected = $('#type :selected').text();
+           document.getElementById("demo").innerHTML = selected;
+           var url = "/PurchaseTest/FillDDLModel?selected=" + selected;// 
+
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myArr = JSON.parse(this.responseText);
+                    populateDDLModel(myArr);
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+
+            
+        }
+        function populateDDLModel(arr) {
+            //clearring the fields
+            $('#unitPrice').val("");
+            $('#salePrice').val("");
+            $('#barcode').val("");
+
+            $('#model').html("");
+            $('#model').append("<option> Select </option>")
+            for (var i = 0; i < arr.length; i++) {
+                $('#model').append("<option>" + arr[i].Model + "</option>")
+            } //$('#unitPrice').text = arr
+        }
+
+        function loadPrices() {
+                var xmlhttp = new XMLHttpRequest();
+                var selected = $('#model :selected').text();
+                //document.getElementById("demo").innerHTML = selected;
+                var url = "/PurchaseTest/FillPrices?selected=" + selected;// 
+
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var prices = JSON.parse(this.responseText);
+                        //document.getElementById("demo").innerHTML = $.trim(prices.UniqueBarcode);
+                        $('#unitPrice').val("");
+                        $('#salePrice').val("");
+                        $('#barcode').val("");
+                        $('#unitPrice').val(prices.UnitPrice);
+                        $('#salePrice').val(prices.SellingPrice);
+                        $('#description').val(prices.Description);
+                        changeBarcodeStatus($.trim(prices.UniqueBarcode));
+                    }
+                };
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+        }
+        function changeBarcodeStatus(status) {
+            if (status == "Y")
+                $('#barcode').val("Unique Barcode");
+            else if (status == "N")
+                $('#barcode').val("NO Barcode");
+            else if (status == "NY")
+                $('#barcode').val("Same Barcode");
+        }
+        //document.getElementById("demo").innerHTML = 1;
+        function barcodeSerialClick() {
+        //     document.getElementById("demo").innerHTML + 1;
+        //    $("#barcodeSerial").on('keydown');
+            //$("#barcodeSerial").keypress(function (ev) {
+
+            //document.getElementById("demo").innerHTML = "clicked";
+            //if (ev.keyCode == 13) {
+                addBarcodeInTable();
+                $("#barcodeSerial").val("");
+            //} 
+                
+            //});
+        //    $("#barcodeSerial").off('keydown');
+        }
+        function addBarcodeInTable() {
+            var rowCount = $('#barcodeSerialTable tr').length;
+            var barcode = $('#barcodeSerial').val();
+            var color = $('#color :selected').text();
+            //var button = ("<td> <button  id='" + rowCount + "'>Delete</button></td>");
+            var button = ("<td> <input type=\"button\" id=\"" + rowCount + "\" onclick=\"deleteBarcode(this)\" value=\"Delete\"/></td>");
+            $("#barcodeSerialTable").append("<tr id=\"" + rowCount+"\">" +
+                    "<td>"+ rowCount + "</td>" +
+                    "<td>" + barcode + "</td>" +
+                   "<td>" + color + "</td>" +
+                   button + 
+                   //"<td>" + "<include type='button' value='Delete'/>" + "</td>" +
+                   //"<td>" + "<include value='Delete' type='button' id='" + rowCount + "' onclick='deleteBarcode()'/>" + "</td>" +
+                "</tr>");
+            //button.appendTo()
+            rowCount++;
+        }
+        function deleteBarcode(perametr) {
+            var i = perametr.parentNode.parentNode.rowIndex;
+            document.getElementById("barcodeSerialTable").deleteRow(i);
+        }
+        function deleteProduct(perametr) {
+            var i = perametr.parentNode.parentNode.rowIndex;
+            document.getElementById("productGridTable").deleteRow(i);
+        }
+        function validateFields(){
+            //if()
+        }
+        function addProduct() {
+            var rowCount = $('#productGridTable tr').length;
+            var button = ("<td> <input type=\"button\" id=\"" + rowCount + "\" onclick=\"deleteProduct(this)\" value=\"Delete\"/></td>");
+            var quan = $('#quantity').val();
+
+            var xmlhttp = new XMLHttpRequest();
+            var selected = $('#model :selected').text();
+            //document.getElementById("demo").innerHTML = selected;
+            var url = "/PurchaseTest/FillProductTable?selected=" + selected;// 
+
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var product = JSON.parse(this.responseText);
+                    document.getElementById("demo").innerHTML = "Fucked";
+                    
+                    $("#productGridTable").append("<tr>" +
+                    "<td>" + rowCount++ + "</td>" +
+                    "<td>" + product.ID + "</td>" +
+                   "<td>" + product.Type + "</td>" +
+                   "<td>" + product.Model + "</td>" +
+                   "<td>" + quan + "</td>" +
+                   "<td>" + product.UnitPrice + "</td>" +
+                   "<td>" + product.SellingPrice + "</td>" +
+                   "<td>" + (product.UnitPrice * quan) + "</td>" +
+                   button +
+                "</tr>");
+
+                    
+                    $('#barcodeSerialTable tr').each(function (row, tr) {
+                        BarcodeTableData[row] = {
+                            Barcode_Serial: $(tr).find('td:eq(1)').text(),
+                            Color: $(tr).find('td:eq(2)').text()
+                        }
+                    });
+                    BarcodeTableData.shift();
+                    console.debug(BarcodeTableData);
+                    //clearing fields
+                    $('#type').val(0);
+                    $('#model').val(0);
+                    $('#unitPrice').val("");
+                    $('#salePrice').val("");
+                    $('#uniqueBarcode').val("");
+                    $('#barcode').val("");
+                    $('#quantity').val(""); 
+                    $("#barcodeSerialTable td").remove();
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+        function savePurchase() {
+            //document.getElementById("demo").innerHTML = "savePurchase";
+
+
+            //$(document).ready(function (e) {
+           
+        //$("PurchaseTestForm1").submit(function (e) {
+        //    alert('HI1');
+        //            e.preventDefault();
+                    
+        //            //var TableData = new Array();
+        //            //$('#productGridTable tr').each(function (row, tr) {
+        //            //    TableData = TableData + $(tr).find('td:eq(0)').text();
+        //            //});
+        //            var ProductID = [];
+        //            var Quan = [];
+        //            var UnitPrice = [];
+        //            var SellingPrice = [];
+        //            var Supplier;
+        //            $("#productGridTable").find("tbody tr").each(function () {
+        //                ProductID.push($(this).find("td:eq(1)").text());
+        //                Quan.push($(this).find("td:eq(4)").text());
+        //                UnitPrice.push($(this).find("td:eq(5)").text());
+        //                SellingPrice.push($(this).find("td:eq(6)").text());
+        //            }); alert('HI2');
+        //            //alert(ProductID.join(","));
+        //            //var postData = { values: TableData };
+        //            var someObj = {
+        //                ID: ProductID[0],
+        //                Quantity: Quan[0],
+        //                Unit_Price: UnitPrice[0],
+        //                Selling_Price: SellingPrice[0]
+        //            };
+
+        //            $.ajax({
+        //                type: "POST",
+        //                url: "/PurchaseTest/Index",
+        //                contentType: "application/json; charset=utf-8",
+        //                dataType: "json",
+        //                data: JSON.stringify(someObj),
+        //                success: function (result) {
+        //                    submit();
+        //                }
+        //            });
+        //            return false;
+        //        });
+            //});
+        }
+        //Une fois les données sauvées, on fait le submit.
+        function submit() {
+            $("form").unbind('submit').submit();
+        }
+
+        //function saveButtonClick(){}
+        $(document).ready(function () {
+            $(function () {
+                $('#saveButton').click(function (event) {
+                    event.preventDefault();
+                    //$("#saveButton").off('submit');
+                    //var Product = {  
+                    //    ID: 1042,  
+                    //    Model: 'J7',  
+                    //    Type: 'Samsung Mobile'  
+                    //};
+                    var ProductID = [];
+                    var Quantity = [];
+                    var UnitPrice = [];
+                    var SellingPrice = [];
+                    var Supplier = $('#supplier :selected').text();
+                    var arr = [];
+                    var container = [];
+                    $("#productGridTable").find("tbody tr").each(function () {
+                        ProductID.push($(this).find("td:eq(1)").text());
+                        Quantity.push($(this).find("td:eq(4)").text());
+                        UnitPrice.push($(this).find("td:eq(5)").text());
+                        SellingPrice.push($(this).find("td:eq(6)").text());
+                    });
+                    //$("#barcodeSerialTable").find("tbody tr").each(function () {
+                    //    arr = {
+                    //        Barcode_Serial: $(this).find("td:eq(1)").text(),
+                    //        Color: $(this).find("td:eq(2)").text()
+                    //    };
+                    //    //container.concat(arr);
+                    //});
+
+                    //JSON.stringify(obj);
+                    //alert(ProductID[0]);
+                    //var parsed = JSON.parse(container);
+                    //alert(parsed[0].SL);
+                    //$.each(container, function (index, value) {
+                    //    alert(index + ': ' + value);
+                    //    //alert(index + ': ' + value);
+                    //    test = value;
+                    //});
+                    //$.each(ProductID, function (index, value) {
+                    //    alert(index + ': ' + value);
+
+                    //    test = value;
+                    //});
+
+                    //alert(ProductID.values);
+                    
+                    //var postData = { values: TableData };
+                    var t = 1;
+                    var Product = {
+                        ID: ProductID.pop(),
+                        Model: $('#supplier :selected').text(),//sending the product suppllier in model variable
+                        Type: $("#refNo").val(),//sending refNo in Type variable
+                        Quantity_Available: Quantity.pop(),
+                        Unit_Price: UnitPrice.pop(),
+                        Selling_Price: SellingPrice.pop(),
+                        Des: $('#description').val(),
+                        Date_Updated: $('#date').val(),
+                        Barcodes: BarcodeTableData
+
+                    };
+                    console.debug(Product);
+                    //alert('hi');
+                    $.ajax({
+                        type: "POST",
+                        url: "/PurchaseTest/Index",
+                        data: JSON.stringify(Product),
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            alert(data.msg);
+                        },
+                        error: function () {
+                            alert("Error occured!!")
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+    @using (Html.BeginForm("Index", "PurchaseTest", FormMethod.Post, new { id = "PurchaseTestForm1", name = "PurchaseTestForm" }))
+    {
+        @Html.AntiForgeryToken()
+    
+        <div class="form-horizontal">
+
+            <table class="table table-responsive" style="width:80%">
+                <tr>
+                    <td class="auto-style1"> Date </td>
+                    <td colspan="4">
+                        <input type="text" value="@DateTime.Now.ToShortDateString()" id="date" />
+                    </td>
+                    <td> <span id="errorSpan"></span></td>
+                </tr>
+
+                <tr>
+                    <td class="auto-style1"> Ref No </td>
+                    <td>
+                        <input type="text" id="refNo" />
+                    </td>
+                    <td> Supplier </td>
+                    <td colspan="3">
+                        @*<select id="supplier" style="width:auto">
+                                <option> Select </option>
+                            </select>*@
+                        @Html.DropDownList("supplier", new SelectList(ViewBag.supplierList), "Select", new { Class = "form-control" })
+                        @*ViewData["selectedSupplier"] as string*@
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="auto-style1"> Product Type </td>
+                    <td>
+                        @Html.DropDownList("type", new SelectList(ViewData["typeList"] as string[]), ViewData["selectedType"] as string, new { Class = "form-control", @onchange = "loadDDL()" })
+                        <p id="demo"></p>
+                        
+                    </td> 
+                    <td> Product Model </td>
+                    <td colspan="3">
+                        @Html.DropDownList("model", new SelectList(ViewData["modelList"] as string[]), "Select", new { Class = "form-control", @onchange = "loadPrices()"})
+                        @*ViewData["selectedModel"] as string*@
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="auto-style1"> Product Quantity </td>
+                    <td>
+                        <input type="text" id="quantity" />
+                        @*@Html.Editor("quantity", new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @value = "0" } })*@
+                    </td>
+                    <td> Unit price </td>
+                    <td class="auto-style2">
+                        <input type="text" id="unitPrice" class="auto-style3" />
+                    </td>
+                    <td> Sale price </td>
+                    <td>
+                        <input type="text" id="salePrice" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="auto-style1"> Barcode </td>
+                    <td>
+                        <input type="text" id="barcode" readonly="readonly" />
+                    </td>
+                    <td> Barcode Serial </td>
+                    <td class="auto-style2">
+                        <input id="barcodeSerial" type="text" class="auto-style4" />
+                        <input type="button" id="barcodeAddButton" value="Add" onclick="barcodeSerialClick();"/>
+                        @*@Html.TextBox("barcodeSerial", "", new { Class = "form-control" });*@
+                        @*, onkeydown = "test()"*@
+                    </td>
+                    <td> Color </td>
+                    <td>
+                        @Html.DropDownList("color", new SelectList(ViewData["colorList"] as string[]), "None", new { Class = "form-control" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="auto-style1"> Description </td>
+                    <td colspan="3">
+                        <input type="text" id="description" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="button" id="addProductButton" onclick="addProduct()" value="Add Product" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="submit"  id="saveButton" value="Create" class="btn btn-default" />
+                    </td>
+                </tr>
+
+            </table>
+            <table id="barcodeSerialTable"  class="table table-bordered" style="width:20%;float:left;">
+                <tr>
+                    <th> SL </th>
+                    <th> Barcode Serial </th>
+                    <th> Color </th>
+                    <th> Op. </th>
+                </tr>
+                
+            </table>
+            <table id="productGridTable"  class="table table-bordered table-responsive table-hover" style="width:70%; float:right;">
+                <tr>
+                    <th> SL </th>
+                    <th> Product ID </th>
+                    <th> Product Type </th>
+                    <th> Product Model </th>
+                    <th> Quantity </th>
+                    <th> Unit Price </th>
+                    <th> Selling Price </th>
+                    <th> Sub Total </th>
+                </tr>
+
+            </table>
+            @*<div class="col-md-offset-2 col-md-10">
+                <input type="button" id="saveButton" value="Create" onclick="savePurchase()" class="btn btn-default" />
+            </div>*@
+        </div>
+    }
+    
+</body>
+</html>
