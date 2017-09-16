@@ -1,0 +1,88 @@
+﻿@model IEnumerable<POSDataAccess.Barcode>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        function decrease() {
+            var aa = $('#num').val();
+            //alert(aa);
+            $('#num').val(--aa);
+        }
+        function increase() {
+            var aa = $('#num').val();
+            $('#num').val(++aa);
+        }
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Barcodes", FormMethod.Post, new { id = "barcodeForm", name = "barcodeForm" }))
+    {
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-responsive table-hover table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Barcode_Serial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Type)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Barcode_Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Barcode_Serial }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Barcode_Serial }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Barcode_Serial })
+            </td>
+        </tr>
+    }
+    
+    </table>
+    @*<input type="submit" onclick="decrease()" value="Previous"/>
+    <input type="submit" onclick="increase()" value="Next" />
+    <input id="num" type="text" value="1" />*@
+    }
+</body>
+</html>

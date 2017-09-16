@@ -1,0 +1,104 @@
+﻿@model POSDataAccess.Product
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity_Available)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Quantity_Available)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity_Sold)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Quantity_Sold)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Unit_Price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Unit_Price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Selling_Price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Selling_Price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Des)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Des)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Updated)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Date_Updated)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Unique_Barcode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Unique_Barcode)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

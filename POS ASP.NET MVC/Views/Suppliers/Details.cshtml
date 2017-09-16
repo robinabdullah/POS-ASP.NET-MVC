@@ -1,0 +1,66 @@
+﻿@model POSDataAccess.Supplier
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Supplier</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Company_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Company_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Contact_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Contact_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Contact_Designation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Contact_Designation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Address.City)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Address.City)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

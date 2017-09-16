@@ -1,0 +1,95 @@
+﻿@model IEnumerable<POSDataAccess.Product>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity_Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity_Sold)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Selling_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Des)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Updated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unique_Barcode)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity_Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity_Sold)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit_Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Selling_Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Des)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_Updated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unique_Barcode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
